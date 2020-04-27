@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState } from "react";
+import api from "./services/api";
 import "./styles.css";
 
 function App() {
@@ -12,7 +12,13 @@ function App() {
   });
 
   async function handleAddRepository() {
-    // TODO
+    const { data } = await api.post("/repositories", {
+      title: `Project ${new Date().getMilliseconds()}`,
+      owner: "Sérgio Neto",
+      techs: ["HE", "HE", "HE"],
+    });
+
+    setRepositories([...repositories, data]);
   }
 
   async function handleRemoveRepository(id) {
